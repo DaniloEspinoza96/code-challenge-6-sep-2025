@@ -1,4 +1,4 @@
-package com.example.codechallenge.core.db
+package com.example.codechallenge.features.user.data.local.db
 
 import android.content.Context
 import androidx.room.Database

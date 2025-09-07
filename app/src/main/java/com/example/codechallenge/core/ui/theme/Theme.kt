@@ -1,4 +1,4 @@
-package com.example.codechallenge.ui.theme
+package com.example.codechallenge.core.ui.theme
 
 import android.app.Activity
 import android.os.Build
