@@ -6,7 +6,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.codechallenge.features.user.domain.model.UserInfo
-import com.example.codechallenge.utis.TinkManager
+import com.example.codechallenge.utils.TinkManager
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.map
 

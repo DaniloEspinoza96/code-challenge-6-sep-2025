@@ -12,12 +12,17 @@ android {
 
     defaultConfig {
         applicationId = "com.example.codechallenge"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "API_KEY", "\"a6f0ebbdc652103af3f2db00db27a724bd486b7d\"") // this should come from a secret manager if it is prone to change
+        buildConfigField("String", "BASE_URL", "\"https://api.cmfchile.cl/api-sbifv3/recursos_api/\"") // this too
+        buildConfigField("Integer", "MONTHS_RANGE", "6")
+        buildConfigField("String", "TIMEZONE", "\"America/Santiago\"")
     }
 
     buildTypes {
@@ -38,6 +43,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -67,6 +73,10 @@ dependencies {
     implementation(libs.logging.interceptor)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.gson)
+    implementation(libs.moshi.kotlin)
+    implementation(libs.converter.moshi)
+    kapt(libs.moshi.kotlin.codegen)
+    implementation(libs.okhttp)
 
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)

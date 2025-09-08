@@ -1,4 +1,4 @@
-package com.example.codechallenge.utis
+package com.example.codechallenge.utils
 
 import com.google.crypto.tink.Aead
 import javax.inject.Inject
