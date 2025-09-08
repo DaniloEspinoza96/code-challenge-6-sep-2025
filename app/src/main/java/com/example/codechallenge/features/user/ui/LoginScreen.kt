@@ -31,11 +31,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.codechallenge.BuildConfig
 import com.example.codechallenge.features.user.presentation.LoginEffect
 import com.example.codechallenge.features.user.presentation.LoginViewModel
 import com.example.codechallenge.features.user.presentation.UiError
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.drop
 
 @Composable
 fun LoginScreen(
@@ -45,8 +50,18 @@ fun LoginScreen(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val snackBarHostState = remember { SnackbarHostState() }
+    val lifecycle = LocalLifecycleOwner.current.lifecycle
 
     LaunchedEffect(Unit) {
+        lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            viewModel.userInfo
+                .collectLatest { userInfo ->
+                    if (userInfo != null) {
+                        onLoginSuccess()
+                        return@collectLatest
+                    }
+                }
+        }
         viewModel.effects.collect { effect ->
             when (effect) {
                 LoginEffect.LoggedIn -> onLoginSuccess()
