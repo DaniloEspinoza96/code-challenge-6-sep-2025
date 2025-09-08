@@ -12,8 +12,7 @@ import javax.inject.Inject
 
 /*
 Users will be stored in a local db, for this challenge's purpose, even if we all know it would be
-preferable to store it in a service. Passwords will be hashed here, even if we know the hash must be
-done in the backend.
+preferable to store it in a service. Passwords won't be hashed, as it has no purpose and in real case scenarios we don't hash in the front.
  */
 class UserRepositoryImpl @Inject constructor(
     private val userDao: UserDao,
