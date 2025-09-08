@@ -102,7 +102,7 @@ fun SignUpScreen(
                     isError = state.nameError != null,
                     modifier = Modifier.fillMaxWidth()
                 )
-                state.nameError?.let { uiError ->
+                state.lastnameError?.let { uiError ->
                     val message = when (uiError) {
                         UiError.REQUIRED -> "Apellido requerido."
                         UiError.INVALID -> "Apellido inválido."
