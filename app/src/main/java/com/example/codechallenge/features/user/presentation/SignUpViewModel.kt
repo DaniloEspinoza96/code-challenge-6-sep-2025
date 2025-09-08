@@ -82,7 +82,7 @@ class SignUpViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
-            _state.value = SignUpFormState(isSubmitting = true)
+            _state.update { it.copy(isSubmitting = true) }
             signUpUseCase(
                 User(
                     name = state.name,
@@ -96,7 +96,7 @@ class SignUpViewModel @Inject constructor(
                     _effects.send(SignUpEffect.SignedUp)
                 },
                 onFailure = {
-                    _state.update { _state.value.copy(isSubmitting = false) }
+                    _state.update { state ->  state.copy(isSubmitting = false) }
                     _effects.send(SignUpEffect.Error(it.message ?: "Hubo un error al registrarse"))
                 }
             )

@@ -55,7 +55,7 @@ class LoginViewModel @Inject constructor(
                     _effects.send(LoginEffect.LoggedIn)
                 },
                 onFailure = { e ->
-                    _state.update { _state.value.copy(isSubmitting = false) }
+                    _state.update { state -> state.copy(isSubmitting = false) }
                     _effects.send(LoginEffect.Error(e.message ?: "Hubo un error al iniciar sesión"))
                 }
             )
