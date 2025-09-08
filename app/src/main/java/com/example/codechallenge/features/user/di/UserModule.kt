@@ -5,7 +5,7 @@ import com.example.codechallenge.features.user.data.local.datastore.UserPreferen
 import com.example.codechallenge.features.user.data.local.db.AppDatabase
 import com.example.codechallenge.features.user.data.repository.UserRepositoryImpl
 import com.example.codechallenge.features.user.domain.repository.UserRepository
-import com.example.codechallenge.utis.TinkManager
+import com.example.codechallenge.utils.TinkManager
 import com.google.crypto.tink.Aead
 import com.google.crypto.tink.KeysetHandle
 import com.google.crypto.tink.aead.AeadConfig
