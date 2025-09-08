@@ -16,7 +16,7 @@
         android:theme="@style/Theme.CodeChallenge"
         tools:targetApi="31" >
         <activity
-            android:name=".features.main.MainActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.CodeChallenge" >
             <intent-filter>
