@@ -140,7 +140,7 @@ fun HomeScreen(
                     ConstraintLayout {
                         val (text, icon) = createRefs()
 
-                        Text(localDateFormatted(),
+                        Text(state.selectedDate,
                             modifier = Modifier.constrainAs(text) {
                                 start.linkTo(parent.start)
                                 end.linkTo(icon.start)
