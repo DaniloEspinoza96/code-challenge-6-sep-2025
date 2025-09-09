@@ -2,7 +2,6 @@ package com.example.codechallenge.features.main.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.codechallenge.BuildConfig
 import com.example.codechallenge.features.main.domain.model.Currency
 import com.example.codechallenge.features.main.domain.usecase.GetCurrencyHistoryUseCase
 import com.example.codechallenge.features.user.domain.repository.UserRepository
@@ -16,7 +15,6 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.time.Instant
-import java.time.ZoneId
 import java.time.ZoneOffset
 import java.util.Date
 import javax.inject.Inject
@@ -49,11 +47,11 @@ class MainViewModel @Inject constructor(
                 onSuccess = { currencyHistory ->
                     _state.update { it.copy(isLoading = false, dollarHistory = currencyHistory) }
                 },
-                onFailure = {
+                onFailure = { e ->
                     _state.update {
                         it.copy(
                             isLoading = false,
-                            errorMessage = it.errorMessage
+                            errorMessage = e.message
                                 ?: "Hubo un problema al cargar el histórico del dólar."
                         )
                     }
@@ -62,11 +60,11 @@ class MainViewModel @Inject constructor(
                 onSuccess = { currencyHistory ->
                     _state.update { it.copy(isLoading = false, euroHistory = currencyHistory) }
                 },
-                onFailure = {
+                onFailure = { e ->
                     _state.update {
                         it.copy(
                             isLoading = false,
-                            errorMessage = it.errorMessage
+                            errorMessage = e.message
                                 ?: "Hubo un problema al cargar el histórico del euro."
                         )
                     }
