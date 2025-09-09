@@ -39,7 +39,6 @@ import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -80,11 +79,11 @@ fun SignUpScreen(
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier.fillMaxWidth()
-                    ) { Text("Registrarse", modifier = Modifier.offset(x = (-14).dp)) }
+                    ) { Text("Registrarse", modifier = Modifier.offset(x = (-16).dp)) }
                 },
                 navigationIcon = {
                     IconButton(
-                        onClick = { onBackToLogin() }
+                        onClick = { viewModel.onGoToLogin() }
                     ) {
                         Icon(
                             Icons.AutoMirrored.Filled.ArrowBack,

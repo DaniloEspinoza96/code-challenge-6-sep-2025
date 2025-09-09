@@ -28,12 +28,10 @@ class SignUpViewModel @Inject constructor(
 
     fun onNameChange(value: String) {
         _state.update { it.copy(name = value, nameError = validateName(value)) }
-
     }
 
     fun onLastNameChange(value: String) {
         _state.update { it.copy(lastname = value, lastnameError = validateLastname(value)) }
-
     }
 
     fun onEmailChange(value: String) {
