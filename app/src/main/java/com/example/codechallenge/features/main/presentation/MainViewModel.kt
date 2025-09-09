@@ -1,17 +1,23 @@
 package com.example.codechallenge.features.main.presentation
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.codechallenge.BuildConfig
 import com.example.codechallenge.features.main.domain.model.Currency
 import com.example.codechallenge.features.main.domain.usecase.GetCurrencyHistoryUseCase
 import com.example.codechallenge.features.user.domain.repository.UserRepository
 import com.example.codechallenge.features.user.domain.usecase.LogoutUseCase
+import com.example.codechallenge.utils.localDateFormatted
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.time.Instant
+import java.time.ZoneId
+import java.time.ZoneOffset
 import java.util.Date
 import javax.inject.Inject
 
@@ -22,17 +28,49 @@ class MainViewModel @Inject constructor(
     userRepository: UserRepository
 ) : ViewModel() {
     private val _state = MutableStateFlow(MainState())
+    val state: StateFlow<MainState> get() = _state
+
     fun onStart() {
+        onDateChanged(Date().toInstant().toEpochMilli())
+    }
+
+    fun onDateChanged(date: Long) {
         viewModelScope.launch {
-            getCurrencyHistoryUseCase(Currency.DOLLAR, Date().toInstant().toEpochMilli()).fold(
-                onSuccess = {
-                    Log.e(this.javaClass.simpleName, "Success")
+            _state.update {
+                it.copy(
+                    isLoading = true,
+                    selectedDate = localDateFormatted(
+                        localDate = Instant.ofEpochMilli(date)
+                            .atZone(ZoneOffset.UTC).toLocalDate()
+                    )
+                )
+            }
+            getCurrencyHistoryUseCase(Currency.DOLLAR, date).fold(
+                onSuccess = { currencyHistory ->
+                    _state.update { it.copy(isLoading = false, dollarHistory = currencyHistory) }
                 },
                 onFailure = {
-                    it.message
-                    Log.e(this.javaClass.simpleName, "Failure")
+                    _state.update {
+                        it.copy(
+                            isLoading = false,
+                            errorMessage = it.errorMessage
+                                ?: "Hubo un problema al cargar el histórico del dólar."
+                        )
+                    }
                 })
-            getCurrencyHistoryUseCase(Currency.EURO, Date().toInstant().toEpochMilli())
+            getCurrencyHistoryUseCase(Currency.EURO, date).fold(
+                onSuccess = { currencyHistory ->
+                    _state.update { it.copy(isLoading = false, euroHistory = currencyHistory) }
+                },
+                onFailure = {
+                    _state.update {
+                        it.copy(
+                            isLoading = false,
+                            errorMessage = it.errorMessage
+                                ?: "Hubo un problema al cargar el histórico del euro."
+                        )
+                    }
+                })
         }
     }
 
