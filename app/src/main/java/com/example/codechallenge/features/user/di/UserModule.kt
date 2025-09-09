@@ -2,7 +2,7 @@ package com.example.codechallenge.features.user.di
 
 import android.content.Context
 import com.example.codechallenge.features.user.data.local.datastore.UserPreferences
-import com.example.codechallenge.features.user.data.local.db.AppDatabase
+import com.example.codechallenge.core.db.AppDatabase
 import com.example.codechallenge.features.user.data.repository.UserRepositoryImpl
 import com.example.codechallenge.features.user.domain.repository.UserRepository
 import com.example.codechallenge.utils.TinkManager

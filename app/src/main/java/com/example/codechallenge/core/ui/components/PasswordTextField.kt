@@ -22,11 +22,11 @@ import androidx.compose.ui.text.input.VisualTransformation
 
 @Composable
 fun PasswordTextField(
+    modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
     label: String = "Contraseña",
     isError: Boolean = false,
-    modifier: Modifier = Modifier,
     imeAction: ImeAction = ImeAction.Done,
     onImeAction: (() -> Unit)? = null
 ) {
