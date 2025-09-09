@@ -23,7 +23,7 @@ android {
             "String",
             "API_KEY",
             "\"a6f0ebbdc652103af3f2db00db27a724bd486b7d\""
-        ) // this should come from a secret manager if it is prone to change, since its a code challenge, i left it here
+        ) // this should come from a secret manager if it is prone to change, since its a code challenge, i left it here:
         buildConfigField(
             "String",
             "BASE_URL",

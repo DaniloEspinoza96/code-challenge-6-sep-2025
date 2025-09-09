@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import com.example.codechallenge.utils.validateEmail as utilsValidateEmail
+import com.example.codechallenge.utils.validateEmailWithUiError as utilsValidateEmail
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,10 +28,12 @@ class SignUpViewModel @Inject constructor(
 
     fun onNameChange(value: String) {
         _state.update { it.copy(name = value, nameError = validateName(value)) }
+
     }
 
     fun onLastNameChange(value: String) {
         _state.update { it.copy(lastname = value, lastnameError = validateLastname(value)) }
+
     }
 
     fun onEmailChange(value: String) {

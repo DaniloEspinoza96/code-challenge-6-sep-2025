@@ -16,10 +16,16 @@ fun Date.minusMonths(
     return Date.from(zdt.toInstant())
 }
 
-fun validateEmail(email: String): UiError? {
+fun validateEmailWithUiError(email: String): UiError? {
     if (email.isBlank()) return UiError.REQUIRED
     val r = Regex("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")
     return if (!r.matches(email)) UiError.INVALID else null
+}
+
+fun validateEmail(email: String): Boolean {
+    if (email.isBlank()) return false
+    val r = Regex("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")
+    return r.matches(email)
 }
 
 fun localDateFormatted(

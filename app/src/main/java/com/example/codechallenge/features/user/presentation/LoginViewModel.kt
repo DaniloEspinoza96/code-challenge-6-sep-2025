@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import com.example.codechallenge.utils.validateEmail as utilsValidateEmail
+import com.example.codechallenge.utils.validateEmailWithUiError as utilsValidateEmail
 import javax.inject.Inject
 
 @HiltViewModel
