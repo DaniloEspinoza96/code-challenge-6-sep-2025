@@ -1,6 +1,5 @@
 package com.example.codechallenge.core.network
 
-import com.example.codechallenge.features.main.data.remote.adapter.CurrencyResponseAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient

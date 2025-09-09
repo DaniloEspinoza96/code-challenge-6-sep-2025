@@ -1,9 +1,11 @@
-package com.example.codechallenge.features.user.data.local.db
+package com.example.codechallenge.core.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.codechallenge.features.user.data.local.db.UserDao
+import com.example.codechallenge.features.user.data.local.db.UserEntity
 
 @Database(entities = [UserEntity::class], version = 1)
 abstract class AppDatabase: RoomDatabase() {
